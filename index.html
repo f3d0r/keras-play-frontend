@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+      var model = [];
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function clickNode(event) {
+        var data = event.currentTarget.id;
+        console.log(data);
+        var attributes = jQuery('#attributes');
+        attributes.attr('visibility', 'visible');
+        var form = jQuery("#nodeform");
+        console.log(form);
+        form.attr('visibility', 'visible');
+        form.innerHTML = "";
+        if (data === 'conv') {
+          form.append('Number of Filters: <input type="text" name="filters"><br>');
+          form.append('Weight Initialization: <input type="text" name="kernel_initializer"><br>');
+          form.append('Kernel Size: <input type="text" name="kernel_size"><br>');
+          form.append('Activation: <input type="text" name="activation"><br>');
+        } else if (data === 'maxpool') {
+          form.append('Stride Size: <input type="text" name="pool_size"><br>');
+        } else if (data === 'dropout') {
+          form.append('Rate of Dropout: <input type="text" name="rate"><br>');
+        } else {
+          form.append('Number of Neurons: <input type="text" name="units"><br>');
+          form.append('Weight Initialization: <input type="text" name="kernel_initializer"><br>');
+          form.append('Activation Function: <input type="text" name="activation"><br>');
+          form.append('Use Bias: <input type="text" name="use_bias"><br>');
+        }
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var new_object = ev.target.appendChild(document.getElementById(data));
+        $('#' + data).click(clickNode);
+        if (model.length > 0) {
+          var parent = model[model.length - 1].type;
+          jQuery('#' + parent).connections({ to: '#' + data });
+        }
+        model.push({'type': data});
+      }
+    </script>
+
+    <title>Keras Visual Editor</title>
+  </head>
+  <body>
+    <div id="titlebar">
+      <h1 id="title">Training Your Datasets</h1>
+    </div>
+
+    <div id="sidebar">
+      <div id="dense" class="border rounded op" draggable="true" ondragstart="drag(event)">
+        <h3>Dense</h3>
+      </div>
+      <div id="dropout" class="border rounded op" draggable="true" ondragstart="drag(event)">
+        <h3>Dropout</h3>
+      </div>
+      <div id="maxpool" class="border rounded op" draggable="true" ondragstart="drag(event)">
+        <h3>MaxPool</h3>
+      </div>
+      <div id="conv" class="border rounded op" draggable="true" ondragstart="drag(event)">
+        <h3>Convolution</h3>
+      </div>
+    </div>
+
+    <div id="canvas">
+      <div id="model">
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      </div>
+      <div id="attributes">
+        <form id="nodeform"></form>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="jquery.connections.js"></script>
+  </body>
+</html>
