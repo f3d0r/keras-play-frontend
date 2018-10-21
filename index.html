@@ -50,11 +50,13 @@
       function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
-        var new_object = ev.target.appendChild(document.getElementById(data).cloneNode(true));
-        $('#' + data).click(clickNode);
+        var new_object = document.getElementById(data).cloneNode(true);
+        new_object.id = 'new' + data;
+        ev.target.appendChild(new_object);
+        $('#new' + data).click(clickNode);
         if (model.length > 0) {
           var parent = model[model.length - 1].type;
-          $('#' + parent).connections({ to: '#' + data });
+          $('#new' + parent).connections({ to: '#new' + data });
         }
         model.push({'type': data});
       }
