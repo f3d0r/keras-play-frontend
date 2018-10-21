@@ -29,7 +29,9 @@
         var form = jQuery("#nodeform");
         console.log(form);
         form.attr('visibility', 'visible');
-        form.innerHTML = "";
+        while (form.firstChild) {
+          form.removeChild(form.firstChild);
+        }
         if (data === 'conv') {
           form.append('Number of Filters: <input type="text" name="filters"><br>');
           form.append('Weight Initialization: <input type="text" name="kernel_initializer"><br>');
@@ -51,14 +53,15 @@
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         var new_object = document.getElementById(data).cloneNode(true);
-        new_object.id = 'new' + data;
+        var id = Math.floor(Math.random() * 100).toString();
+        new_object.id = data + id;
         ev.target.appendChild(new_object);
-        $('#new' + data).click(clickNode);
+        $('#' + data + id).click(clickNode);
         if (model.length > 0) {
-          var parent = model[model.length - 1].type;
-          $('#new' + parent).connections({ to: '#new' + data });
+          var parent = model[model.length - 1];
+          $('#' + parent.type + parent.id).connections({ to: '#' + data + id});
         }
-        model.push({'type': data});
+        model.push({'type': data, 'id': id});
       }
     </script>
 
