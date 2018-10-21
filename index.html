@@ -22,16 +22,14 @@
       }
 
       function clickNode(event) {
-        var data = event.currentTarget.id;
+        var data = event.currentTarget.id.replace(/[0-9]/g, '');
         console.log(data);
         var attributes = jQuery('#attributes');
         attributes.attr('visibility', 'visible');
         var form = jQuery("#nodeform");
         console.log(form);
         form.attr('visibility', 'visible');
-        while (form.firstChild) {
-          form.removeChild(form.firstChild);
-        }
+        form.empty();
         if (data === 'conv') {
           form.append('Number of Filters: <input type="text" name="filters"><br>');
           form.append('Weight Initialization: <input type="text" name="kernel_initializer"><br>');
