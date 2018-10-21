@@ -70,6 +70,7 @@
     </div>
 
     <div id="sidebar">
+      <h4> Select the Layers: </h4>
       <div id="dense" class="border rounded op" draggable="true" ondragstart="drag(event)">
         <h3>Dense</h3>
       </div>
@@ -86,14 +87,19 @@
 
     <div id="canvas">
       <div id="model">
-        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <button id="submit" type="button" class="btn btn-success" data-toggle="modal" data-target="#submissionModal">Submit</button>
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+        <button id="submit" type="button" class="bt" data-toggle="modal" data-target="#submissionModal">Submit</button>
+        </div>
+
       </div>
       <div id="attributes">
         <form id="nodeform"></form>
       </div>
     </div>
-
+    <div id="mobile">
+      <h4> Sorry! Currently we only support Desktop Version. </h4>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="submissionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
