@@ -50,11 +50,11 @@
       function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
-        var new_object = ev.target.appendChild(document.getElementById(data));
+        var new_object = ev.target.appendChild(document.getElementById(data).cloneNode(true));
         $('#' + data).click(clickNode);
         if (model.length > 0) {
           var parent = model[model.length - 1].type;
-          jQuery('#' + parent).connections({ to: '#' + data });
+          $('#' + parent).connections({ to: '#' + data });
         }
         model.push({'type': data});
       }
