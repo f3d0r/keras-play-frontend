@@ -84,8 +84,9 @@ body {
   margin-top: 30%;
   :
 }
-  h4{
+  #mobile h4{
     color: #0B6275;
+    text-align: center;
   }
 
 @media only screen and (max-width: 600px) {
