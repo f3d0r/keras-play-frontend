@@ -1,0 +1,29 @@
+{
+    "alias": ["keras-play.f3d0r.com", "keras-play.fedor.me"],
+    "builds": [{
+            "src": "*.html",
+            "use": "@now/html-minifier"
+        },
+        {
+            "src": "*.js",
+            "use": "@now/static"
+        },
+        {
+            "src": "*.css",
+            "use": "@now/static"
+        },
+        {
+            "src": "*.jpeg",
+            "use": "@now/static"
+        }
+    ],
+    "github": {
+        "autoAlias": true,
+        "autoJobCancelation": true,
+        "enabled": true,
+        "silent": true
+    },
+    "name": "keras-play",
+    "regions": ["all"],
+    "version": 2
+}
