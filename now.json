@@ -24,7 +24,7 @@
         "enabled": true,
         "silent": true
     },
-    "name": "keras-play",
+    "name": "keras-play-frontend",
     "regions": ["all"],
     "version": 2
 }
