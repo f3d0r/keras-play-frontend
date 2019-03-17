@@ -1,6 +1,7 @@
 {
     "alias": ["keras-play.f3d0r.com", "keras-play.fedor.me"],
-    "builds": [{
+    "builds": [
+        {
             "src": "*.html",
             "use": "@now/html-minifier"
         },
